@@ -1,5 +1,5 @@
 # pull the official base image
-FROM node:17
+FROM node:20
 # set working direction
 WORKDIR /app
 # install application dependencies
