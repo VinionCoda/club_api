@@ -1,4 +1,4 @@
-/* import express from "express";
+import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
@@ -12,7 +12,7 @@ import * as jwks from "jwks-rsa";
 const app = express();
 const port = process.env.PORT || 5000;
 const uri =
-  "mongodb+srv://mtgclub:R3actmean@cluster0.bmjla.mongodb.net/mtgclub?retryWrites=true&w=majority";
+  "mongodb+srv://mtgclub:NMQcf1hd50mmMA3K@cluster0.bmjla.mongodb.net/mtgclub?retryWrites=true&w=majority";
 
 const jwtCheck = jwt({
   secret: jwks.expressJwtSecret({
@@ -32,11 +32,17 @@ app.use(
   })
 );
 
+process.on('warning', (warning) => {
+  console.log(warning.stack);
+});
+
 //app.use(jwtCheck);
 
 app.use(express.json());
 
 mongoose.connect(uri);
+mongoose.set('strictQuery', false);
+
 const connection = mongoose.connection;
 
 connection.once("open", () => {
@@ -65,21 +71,4 @@ app.use((error, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server is running on port:${port}`);
 });
- */
-
-
-
-import express from 'express'
-import cors from "cors";
-import mongoose from "mongoose";
-
-const app = express()
-const port = 3000
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+ 
