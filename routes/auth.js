@@ -55,10 +55,10 @@ authRouter.route("/addCollection").post(async (req, res) => {
 
 authRouter.route("/removeCard").post(async (req, res) => {
   
-  const cardId = req.body.data;
-  Cards.findOneAndRemove({'card_id': cardId}, (err, docs) => {
+  const cardId = req.body;  
+   Cards.deleteOne({'card_id': cardId.card_id}, (err, docs) => {
     if (err === null) {
-      res.json({ status: "Success", data: docs  });
+      res.json({ status: "Success", data: cardId.card_id});
     } else {
       res.json({ status: "Failed", error : err.message });
     }

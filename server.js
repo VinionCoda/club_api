@@ -5,9 +5,11 @@ import mongoose from "mongoose";
 import cardRouter from "./routes/cards.js";
 import setRouter from "./routes/sets.js";
 import authRouter from "./routes/auth.js";
+import timestampRouter from "./routes/timestamp.js";
 
 import { expressjwt as jwt } from "express-jwt";
 import * as jwks from "jwks-rsa";
+
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -54,6 +56,7 @@ app.get("/", (req, res) => {
 });
 app.use("/cards", cardRouter);
 app.use("/sets", setRouter);
+app.use("/timestamp", timestampRouter);
 app.use("/auth", jwtCheck, authRouter);
 
 app.use((req, res, next) => {
